@@ -1,6 +1,7 @@
 <?php
 
 	require_once 'src/Restaurant.php';
+	require_once 'src/Cuisine.php';
 
     /**
     * @backupGlobals disabled
@@ -64,9 +65,12 @@
 
 	function test_getCuisineId() {
 		//Arrange;
+
+		$cuisine_name = 'Korean';
+		$test_cuisine = new Cuisine($cuisine_name);
 		$name = 'Restaurant Jason';
 		$location = '111 N St.';
-		$cuisine_id = 1;
+		$cuisine_id = $test_cuisine->getId();
 		$id = 0;
 		$test_restaurant = new Restaurant($name, $location, $cuisine_id, $id);
 
@@ -116,7 +120,6 @@
 		//Assert;
 		$this->assertEquals($test_restaurant, $result[0]);
 	}
-
 
 
 

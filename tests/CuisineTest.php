@@ -74,6 +74,20 @@
 
 		}
 
+		function test_find()
+		{
+			//Arrange
+			$name = 'Korean';
+			$cuisine_id = 1;
+			$test_cuisine = new Cuisine($name, $cuisine_id);
+			$test_cuisine->save();
+
+			//Act
+			$result = Cuisine::find($test_cuisine->getId());
+			//Assert
+			$this->assertEquals($test_cuisine, $result);
+		}
+
 
 
 	}
