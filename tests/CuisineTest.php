@@ -166,12 +166,12 @@
 			$location = '111 SE St.';
 			$test_restaurant = new Restaurant($name2, $location, $cuisine_id, $id2);
 			$test_restaurant->save();
+
+			
 			//Act;
 			$test_cuisine->delete();
 
 			//Assert;
-			// var_dump(Restaurant::getAll());
-
 			$this->assertEquals([], Restaurant::getAll());
 
 
