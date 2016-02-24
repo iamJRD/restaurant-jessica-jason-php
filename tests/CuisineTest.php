@@ -121,6 +121,22 @@
 
 		}
 
+		function test_UpdateCuisine() {
+			//Arrange;
+			$cuisine_name = "Korean";
+			$id = null;
+			$test_cuisine = new Cuisine($cuisine_name, $id);
+			$test_cuisine->save();
+
+			$updated_cuisine_name = "Greek";
+
+			//Act;
+			$test_cuisine->update($updated_cuisine_name);
+
+			//Assert;
+			$this->assertEquals("Greek", $test_cuisine->getName());
+		}
+
 
 
 	}
