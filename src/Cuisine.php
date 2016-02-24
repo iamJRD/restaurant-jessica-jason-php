@@ -24,7 +24,7 @@
 		}
 
 		static function getAll() {
-			$returned_cuisines = $GLOBALS['DB']->query("SELECT * FROM cuisine");
+			$returned_cuisines = $GLOBALS['DB']->query("SELECT * FROM cuisine;");
 			$cuisines = array();
 			foreach ($returned_cuisines as $cuisine) {
 				$name = $cuisine['name'];

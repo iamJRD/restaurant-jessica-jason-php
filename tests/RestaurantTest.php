@@ -14,10 +14,10 @@
 	class RestaurantTest extends PHPUnit_Framework_TestCase
 	{
 
-	// protected function tearDown()
-    // {
-    //   Restaurant::deleteAll();
-    // }
+	protected function tearDown()
+    {
+      Restaurant::deleteAll();
+    }
 
     function test_getName() {
 		//Arrange;
@@ -76,6 +76,49 @@
 		//Assert;
 		$this->assertEquals($cuisine_id, $result);
 	}
+
+	function test_getAll() {
+		//Arrange;
+		$name = 'Restaurant Jason';
+		$location = '111 N St.';
+		$cuisine_id = 1;
+		$id = 0;
+		$test_restaurant = new Restaurant($name, $location, $cuisine_id, $id);
+		$test_restaurant->save();
+
+		$name2 ='Nongs';
+		$location2 = '13 SE Ankeney St.';
+		$cuisine_id2 = 2;
+		$id2 = 1;
+		$test_restaurant2 = new Restaurant($name2, $location2, $cuisine_id2, $id2);
+		$test_restaurant2->save();
+
+
+		//Act;
+		$result = Restaurant::getAll();
+
+		//Assert;
+		$this->assertEquals([$test_restaurant, $test_restaurant2], $result);
+	}
+
+	function test_save()
+	{
+		//Arrange;
+		$name = 'Restaurant Jason';
+		$location = '111 N St.';
+		$cuisine_id = 1;
+		$id = 0;
+		$test_restaurant = new Restaurant($name, $location, $cuisine_id, $id);
+		$test_restaurant->save();
+		//Act;
+		$result = Restaurant::getAll();
+
+		//Assert;
+		$this->assertEquals($test_restaurant, $result[0]);
+	}
+
+
+
 
 
 
