@@ -18,7 +18,7 @@
 			Cuisine::deleteAll();
 			Restaurant::deleteAll();
 		}
-		
+
 		function test_getName() {
 			//Arrange;
 			$name = 'Japanese';

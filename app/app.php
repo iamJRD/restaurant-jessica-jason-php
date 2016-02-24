@@ -32,15 +32,21 @@
 
 	$app->get('/cuisine/{id}', function($id) use ($app) {
 		$cuisine = Cuisine::find($id);
-		$resturants = Restaurant::getAll();
+		$restaurants = $cuisine->getRestaurants();
 		return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $restaurants));
 	});
 
-	// $app->post('/add_cuisine/{id}', function($id) use ($app) {
-	// 	$cuisine = new Cuisine($_POST['name']);
-	// 	$cuisine->save();
-	// 	return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine));
-	// });
+	$app->post('/add_restaurant', function() use ($app){
+		$restaurant_name = $_POST['restaurant_name'];
+		$restaurant_location = $_POST['location'];
+		$cuisine_id = $_POST['cuisine_id'];
+		var_dump($cuisine_id);
+		$restaurant = new Restaurant($restaurant_name, $restaurant_location, $cuisine_id, $id = null);
+		$restaurant->save();
+		$cuisine = Cuisine::find($cuisine_id);
+		return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
+
+	});
 
 	return $app;
 
