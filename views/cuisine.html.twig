@@ -8,7 +8,6 @@
     <body>
         <div class="container-fluid">
             <h2>{{ cuisine.getName }}</h2>
-            <h2>{{ new_name }}</h2>
             <h4>Here are your current restaurants:</h4>
             <ul>
                 {% for restaurant in restaurants %}
@@ -17,7 +16,7 @@
             </ul>
 
             <form action="/add_restaurant" method="post">
-                <input type="hidden" id="cuisine_id" name="cuisine_id" value="{{ cuisine.getId }}"
+                <input type="hidden" id="cuisine_id" name="cuisine_id" value="{{ cuisine.getId }}">
                 <label for="restaurant_name">Name of Restaurant</label>
                 <input type="text" name="restaurant_name" value="" required>
                 <label for="location">Location</label>
@@ -26,6 +25,7 @@
             </form>
             <h5>Edit Cuisine Name</h5>
             <form action="/cuisine/{{ cuisine.getId }}/edit" method="post">
+                <input type="hidden" id="cuisine_id" name="cuisine_id" value="{{ cuisine.getId }}">
                 <input type="hidden" name="_method" value="patch">
                 <label for="cuisine_name">Rename your Cuisine</label>
                 <input type="text" name="cuisine_name" value="">
