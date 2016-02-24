@@ -20,6 +20,14 @@
                 <li><a href="#">{{ cuisine.getName }}</a></li>
             {% endfor %}
             </ul>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="/delete_cuisines" method="post">
+                        <button type="submit" class="btn btn-info" name="button">Clear List</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </body>
 </html>
