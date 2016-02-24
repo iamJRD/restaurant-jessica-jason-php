@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <meta charset="utf-8">
         <title>{{ cuisine.getName }}</title>
     </head>
@@ -17,12 +18,16 @@
             <form action="/add_restaurant" method="post">
                 <input type="hidden" id="cuisine_id" name="cuisine_id" value="{{ cuisine.getId }}"
                 <label for="restaurant_name">Name of Restaurant</label>
-                <input type="text" name="restaurant_name" value="">
+                <input type="text" name="restaurant_name" value="" required>
                 <label for="location">Location</label>
-                <input type="text" name="location" value="">
+                <input type="text" name="location" value="" required>
                 <button type="submit" class="btn btn-default" name="button">Submit</button>
             </form>
+
+            <a href="/"><button type="button" class="btn btn-info" name="button">Home</button></a>
         </div>
+
+
 
     </body>
 </html>
