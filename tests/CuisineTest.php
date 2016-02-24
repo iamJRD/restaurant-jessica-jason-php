@@ -1,6 +1,7 @@
 <?php
 
 	require_once 'src/Cuisine.php';
+	require_once 'src/Restaurant.php';
 
     /**
     * @backupGlobals disabled
@@ -15,8 +16,9 @@
 	{
 		protected function tearDown() {
 			Cuisine::deleteAll();
+			Restaurant::deleteAll();
 		}
-
+		
 		function test_getName() {
 			//Arrange;
 			$name = 'Japanese';
@@ -78,14 +80,45 @@
 		{
 			//Arrange
 			$name = 'Korean';
-			$cuisine_id = 1;
-			$test_cuisine = new Cuisine($name, $cuisine_id);
+			$id = 1;
+			$test_cuisine = new Cuisine($name, $id);
 			$test_cuisine->save();
 
 			//Act
 			$result = Cuisine::find($test_cuisine->getId());
 			//Assert
 			$this->assertEquals($test_cuisine, $result);
+		}
+
+		function test_getRestaurants() {
+
+			//Arrange;
+			$cuisine_name = 'Korean';
+			$id = 1;
+			$test_cuisine = new Cuisine($cuisine_name, $id);
+			$test_cuisine->save();
+
+
+			$restaurant_name = 'House of Jessica';
+			$location = 'Epicodus';
+			$cuisine_id = $test_cuisine->getId();
+			$test_restaurant = new Restaurant($restaurant_name, $location, $cuisine_id);
+			$test_restaurant->save();
+
+
+			$restaurant_name2 = 'House of Epicodus';
+			$location2 = 'Oak and 6th';
+			$cuisine_id2 = null;
+			$test_restaurant2 = new Restaurant($restaurant_name2, $location2, $cuisine_id2);
+			$test_restaurant2->save();
+
+
+			//Act;
+			$result = $test_cuisine->getRestaurants();
+
+			//Assert;
+			$this->assertEquals([$test_restaurant], $result);
+
 		}
 
 

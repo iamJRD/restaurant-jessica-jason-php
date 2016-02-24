@@ -30,6 +30,18 @@
 		return $app['twig']->render('index.html.twig');
 	});
 
+	$app->get('/cuisine/{id}', function($id) use ($app) {
+		$cuisine = Cuisine::find($id);
+		$resturants = Restaurant::getAll();
+		return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $restaurants));
+	});
+
+	// $app->post('/add_cuisine/{id}', function($id) use ($app) {
+	// 	$cuisine = new Cuisine($_POST['name']);
+	// 	$cuisine->save();
+	// 	return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine));
+	// });
+
 	return $app;
 
 
