@@ -55,5 +55,32 @@
         {
             return $this->restaurant_id;
         }
+
+        function save()
+        {
+            $GLOBALS['DB']->exec("INSERT INTO reviews (user_name, user_rating, user_review, restaurant_id) VALUES ('{$this->getUserName()}', {$this->getUserRating()}, '{$this->getUserReview()}', {$this->getRestaurantId()});");
+            $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        static function getAll()
+        {
+            $returned_reviews = $GLOBALS['DB']->query('SELECT * FROM reviews');
+            $reviews = array();
+            foreach($returned_reviews as $review) {
+                $user_name = $review['user_name'];
+                $user_rating = $review['user_rating'];
+                $user_review = $review['user_review'];
+                $id = $review['id'];
+                $restaurant_id = $review['restaurant_id'];
+                $new_review = new Review($user_name, $user_rating, $user_review, $id, $restaurant_id);
+                array_push($reviews, $new_review);
+            }
+            return $reviews;
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec('DELETE FROM reviews');
+        }
     }
 ?>

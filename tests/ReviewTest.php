@@ -13,11 +13,11 @@
 
     class ReviewTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //     Restaurant::deleteAll();
-        //     Review::deleteAll();
-        // }
+        protected function tearDown()
+        {
+            Restaurant::deleteAll();
+            Review::deleteAll();
+        }
 
         function testGetUserName()
         {
@@ -102,6 +102,69 @@
 
             // Assert
             $this->assertEquals(null, $result);
+        }
+
+        function testSave()
+        {
+            // Arrange
+            $name = 'Bob';
+            $rating = 4;
+            $review = 'Yum';
+            $restaurant_id = 1;
+            $id = null;
+            $test_review = new Review($name, $rating, $review, $id, $restaurant_id);
+
+            //act
+            $test_review->save();
+
+            //assert
+            $result = Review::getAll();
+            $this->assertEquals($test_review, $result[0]);
+        }
+
+        function testGetAll()
+        {
+            // Arrange
+            $name = 'Bob';
+            $rating = 4;
+            $review = 'Yum';
+            $restaurant_id = 1;
+            $id = null;
+            $test_review = new Review($name, $rating, $review, $id, $restaurant_id);
+            $test_review->save();
+
+            $name2 = 'Ann';
+            $rating2 = 4;
+            $review2 = 'Okay';
+            $restaurant_id = 1;
+            $id2 = null;
+            $test_review2 = new Review($name2, $rating2, $review2, $id2, $restaurant_id);
+            $test_review2->save();
+
+            // Act
+            $result = Review::getAll();
+
+            // Assert
+            $this->assertEquals([$test_review, $test_review2], $result);
+        }
+
+        function testDeleteAll()
+        {
+            // Arrange
+            $name = 'Bob';
+            $rating = 4;
+            $review = 'Yum';
+            $restaurant_id = 1;
+            $id = null;
+            $test_review = new Review($name, $rating, $review, $id, $restaurant_id);
+            $test_review->save();
+
+            // Act
+            Review::deleteAll();
+
+            // Assert
+            $result = Review::getAll();
+            $this->assertEquals([], $result);
         }
     }
 ?>
