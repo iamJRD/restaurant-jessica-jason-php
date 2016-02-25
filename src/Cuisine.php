@@ -4,26 +4,31 @@
 		private $name;
 		private $id;
 
-		function __construct($name, $id = null) {
+		function __construct($name, $id = null)
+		{
 			$this->name = $name;
 			$this->id = $id;
 		}
 
 		//setters;
 
-		public function setName($new_name) {
+		public function setName($new_name)
+		{
 			$this->name = $new_name;
 		}
 		//getters;
-		public function getName() {
+		public function getName()
+		{
 			return $this->name;
 		}
 
-		public function getId() {
+		public function getId()
+		{
 			return $this->id;
 		}
 
-		static function getAll() {
+		static function getAll()
+		{
 			$returned_cuisines = $GLOBALS['DB']->query("SELECT * FROM cuisine;");
 			$cuisines = array();
 			foreach ($returned_cuisines as $cuisine) {
@@ -35,13 +40,14 @@
 			return $cuisines;
 		}
 
-
-        function save() {
+        function save()
+		{
             $GLOBALS['DB']->exec("INSERT INTO cuisine (name) VALUES ('{$this->getName()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-		static function deleteAll() {
+		static function deleteAll()
+		{
 			$GLOBALS['DB']->exec("DELETE FROM cuisine");
 		}
 
@@ -58,7 +64,8 @@
 		   return $found_cuisine;
 		}
 
-		function getRestaurants() {
+		function getRestaurants()
+		{
 			$returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants WHERE cuisine_id = {$this->getId()};");
 			$restaurants = array();
 			foreach ($returned_restaurants as $restaurant) {
@@ -72,12 +79,14 @@
 			return $restaurants;
 		}
 
-		function updateCuisine($updated_cuisine_name) {
+		function updateCuisine($updated_cuisine_name)
+		{
 			$GLOBALS['DB']->exec("UPDATE cuisine SET name = '{$updated_cuisine_name}' WHERE id = {$this->getId()};");
 			$this->setName($updated_cuisine_name);
 		}
 
-		function delete() {
+		function delete()
+		{
 			$GLOBALS['DB']->exec("DELETE FROM cuisine WHERE id = {$this->getId()};");
 			$GLOBALS['DB']->exec("DELETE FROM restaurants WHERE cuisine_id = {$this->getId()};");
 		}

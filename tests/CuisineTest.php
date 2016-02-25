@@ -14,12 +14,14 @@
 
 	class CuisineTest extends PHPUnit_Framework_TestCase
 	{
-		protected function tearDown() {
+		protected function tearDown()
+		{
 			Cuisine::deleteAll();
 			Restaurant::deleteAll();
 		}
 
-		function test_getName() {
+		function test_getName()
+		{
 			//Arrange;
 			$name = 'Japanese';
 			$test_cuisine = new Cuisine($name);
@@ -31,7 +33,8 @@
 			$this->assertEquals($name, $result);
 		}
 
-		function test_getId() {
+		function test_getId()
+		{
 			//Arrange;
 			$name = 'Japanese';
 			$id = 1;
@@ -44,7 +47,8 @@
 			$this->assertEquals($id, $result);
 		}
 
-		function test_getAll() {
+		function test_getAll()
+		{
 			//Arrange;
 			$name = 'Japanese';
 			$test_cuisine = new Cuisine($name);
@@ -61,7 +65,8 @@
 			$this->assertEquals([$test_cuisine, $test_cuisine2], $result);
 		}
 
-		function test_save() {
+		function test_save()
+		{
 			//Arrange;
 			$name = 'Japanese';
 			$id = null;
@@ -86,11 +91,13 @@
 
 			//Act
 			$result = Cuisine::find($test_cuisine->getId());
+			
 			//Assert
 			$this->assertEquals($test_cuisine, $result);
 		}
 
-		function test_getRestaurants() {
+		function test_getRestaurants()
+		{
 
 			//Arrange;
 			$cuisine_name = 'Korean';
@@ -98,20 +105,17 @@
 			$test_cuisine = new Cuisine($cuisine_name, $id);
 			$test_cuisine->save();
 
-
 			$restaurant_name = 'House of Jessica';
 			$location = 'Epicodus';
 			$cuisine_id = $test_cuisine->getId();
 			$test_restaurant = new Restaurant($restaurant_name, $location, $cuisine_id);
 			$test_restaurant->save();
 
-
 			$restaurant_name2 = 'House of Epicodus';
 			$location2 = 'Oak and 6th';
 			$cuisine_id2 = null;
 			$test_restaurant2 = new Restaurant($restaurant_name2, $location2, $cuisine_id2);
 			$test_restaurant2->save();
-
 
 			//Act;
 			$result = $test_cuisine->getRestaurants();
@@ -121,7 +125,8 @@
 
 		}
 
-		function test_UpdateCuisine() {
+		function test_UpdateCuisine()
+		{
 			//Arrange;
 			$cuisine_name = "Korean";
 			$id = null;
@@ -137,7 +142,8 @@
 			$this->assertEquals("Greek", $test_cuisine->getName());
 		}
 
-		function testDeleteCuisine() {
+		function testDeleteCuisine()
+		{
 			//Arrange;
 			$name = 'Korean';
 			$id = null;
@@ -154,7 +160,8 @@
 			$this->assertEquals([$test_cuisine2], Cuisine::getAll());
 		}
 
-		function testDeleteRestaurant() {
+		function testDeleteRestaurant()
+		{
 			//Arrange;
 			$name = 'Korean';
 			$test_cuisine = new Cuisine($name);
@@ -167,17 +174,12 @@
 			$test_restaurant = new Restaurant($name2, $location, $cuisine_id, $id2);
 			$test_restaurant->save();
 
-			
 			//Act;
 			$test_cuisine->delete();
 
 			//Assert;
 			$this->assertEquals([], Restaurant::getAll());
-
-
 		}
-
-
 
 	}
 

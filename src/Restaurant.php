@@ -24,8 +24,6 @@
 			$this->name = $name;
 		}
 
-
-
 		//getters;
 		function getName()
 		{
@@ -46,7 +44,6 @@
 		{
 			return $this->cuisine_id;
 		}
-
 
 		static function getAll()
 		{
@@ -73,9 +70,6 @@
 		{
 			$GLOBALS['DB']->exec("DELETE FROM restaurants");
 		}
-
-
-
 
 	}
  ?>
