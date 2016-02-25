@@ -151,6 +151,23 @@
 			$this->assertEquals([], $result);
 		}
 
+		function test_find()
+		{
+			// Arrange
+			$name = 'Restaurant Jason';
+			$location = '111 N St.';
+			$cuisine_id = 1;
+			$id = 0;
+			$test_restaurant = new Restaurant($name, $location, $cuisine_id, $id);
+			$test_restaurant->save();
+
+			// Act
+			$result = Restaurant::find($test_restaurant->getId());
+
+			// Assert
+			$this->assertEquals($test_restaurant, $result);
+		}
+
 	}
 
 ?>
