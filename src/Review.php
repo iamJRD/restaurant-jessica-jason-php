@@ -96,5 +96,11 @@
         {
             $GLOBALS['DB']->exec('DELETE FROM reviews');
         }
+
+        function deleteReview()
+		{
+			$GLOBALS['DB']->exec("DELETE FROM reviews WHERE id = {$this->getId()};");
+		}
+
     }
 ?>
