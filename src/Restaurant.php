@@ -88,5 +88,12 @@
 		{
 			$GLOBALS['DB']->exec("DELETE FROM restaurants WHERE id = {$this->getId()};");
 		}
+
+		function updateRestaurant($updated_restaurant_name, $updated_restaurant_location)
+		{
+			$GLOBALS['DB']->exec("UPDATE restaurants SET name = '{$updated_restaurant_name}', location = '{$updated_restaurant_location}' WHERE id = {$this->getId()};");
+			$this->setName($updated_restaurant_name);
+			$this->setLocation($updated_restaurant_location);
+		}
 	}
  ?>

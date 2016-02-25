@@ -50,6 +50,20 @@
 		return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
 	});
 
+	$app->get('/restaurant/{id}', function($id) use ($app) {
+		$restaurant = Restaurant::find($id);
+		$cuisine = Cuisine::find($restaurant->getCuisineId());
+		return $app['twig']->render('restaurant.html.twig', array('cuisine' => $cuisine, 'restaurant' => $restaurant));
+	});
+
+	$app->post('/delete_restaurant/{id}', function($id) use ($app) {
+		$deleted_restaurant = Restaurant::find($id);
+		$deleted_restaurant->deleteRestaurant();
+		$restaurants = Restaurant::getAll();
+		$cuisines = Cuisine::getAll();
+		return $app['twig']->render('cuisine.html.twig', array('cuisines' => $cuisines, 'restaurants'=>$restaurants));
+	});
+
 	$app->post('/delete_restaurants', function() use ($app) {
 		Restaurant::deleteAll();
 		$cuisines = Cuisine::getAll();
@@ -60,7 +74,23 @@
 		$name = $_POST['cuisine_name'];
 		$cuisine = Cuisine::find($id);
 		$cuisine->updateCuisine($name);
-		return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' =>$cuisine->getRestaurants()));
+		return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
+	});
+
+	$app->get('/restaurant/{id}/verify', function($id) use ($app) {
+		$new_restaurant_name = $_GET['restaurant_name'];
+		$new_restaurant_location = $_GET['restaurant_location'];
+		$restaurant = Restaurant::find($id);
+		return $app['twig']->render('restaurant_edit_verify.html.twig', array('restaurant' => $restaurant, 'new_restaurant_name' => $new_restaurant_name, 'new_restaurant_location' => $new_restaurant_location));
+	});
+
+	$app->patch('/restaurant/{id}/edit', function($id) use ($app){
+		$name = $_POST['restaurant_name'];
+		$location = $_POST['restaurant_location'];
+		$restaurant = Restaurant::find($id);
+		$cuisine = Cuisine::find($restaurant->getCuisineId());
+		$restaurant->updateRestaurant($name, $location);
+		return $app['twig']->render('restaurant.html.twig', array('cuisine' => $cuisine, 'restaurant' => $restaurant));
 	});
 
 	return $app;
