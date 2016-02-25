@@ -166,5 +166,31 @@
             $result = Review::getAll();
             $this->assertEquals([], $result);
         }
+
+        function testFind ()
+        {
+            //arrange
+            $name = 'Bob';
+            $rating = 4;
+            $review = 'Yum';
+            $restaurant_id = 1;
+            $id = null;
+            $test_review = new Review($name, $rating, $review, $id, $restaurant_id);
+            $test_review->save();
+
+            $name2 = 'Ann';
+            $rating2 = 4;
+            $review2 = 'Okay';
+            $restaurant_id = 1;
+            $id2 = null;
+            $test_review2 = new Review($name2, $rating2, $review2, $id2, $restaurant_id);
+            $test_review2->save();
+            
+            //act
+            $result = Review::find($test_review2->getId());
+
+            //assert
+            $this->assertEquals($test_review2, $result);
+        }
     }
 ?>

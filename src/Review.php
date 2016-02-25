@@ -78,6 +78,20 @@
             return $reviews;
         }
 
+        static function find($search_id)
+        {
+            $found_review = null;
+            $reviews = Review::getAll();
+            foreach($reviews as $review)
+            {
+                $review_id = $review->getId();
+                if($review_id == $search_id)
+                {
+                    $found_review = $review;
+                }
+            }
+            return $found_review;
+        }
         static function deleteAll()
         {
             $GLOBALS['DB']->exec('DELETE FROM reviews');
