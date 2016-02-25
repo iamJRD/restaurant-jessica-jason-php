@@ -193,25 +193,6 @@
 			$this->assertEquals([$test_restaurant2], $result);
 		}
 
-		// function test_updateRestaurant_name()
-		// {
-		// 	// Arrange
-		// 	$name = 'Restaurant Jason';
-		// 	$location = '111 N St.';
-		// 	$cuisine_id = 1;
-		// 	$id = 0;
-		// 	$test_restaurant = new Restaurant($name, $location, $cuisine_id, $id);
-		// 	$test_restaurant->save();
-		//
-		// 	$new_name = 'Restaurant Nic';
-		//
-		//
-		// 	//act
-		// 	$test_restaurant->updateRestaurant($new_name);
-		//
-		// 	//assert
-		// 	$this->assertEquals('Restaurant Nic', $test_restaurant->getName());
-		// }
 		function test_updateRestaurant()
 		{
 			// Arrange
@@ -231,7 +212,6 @@
 			//assert
 			$this->assertEquals(['Restaurant Nic', '222 S ave'], [$test_restaurant->getName(), $test_restaurant->getLocation()]);
 		}
-
 
 	}
 
