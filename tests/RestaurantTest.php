@@ -168,6 +168,31 @@
 			$this->assertEquals($test_restaurant, $result);
 		}
 
+		function test_deleteRestaurant()
+		{
+			// Arrange
+			$name = 'Restaurant Jason';
+			$location = '111 N St.';
+			$cuisine_id = 1;
+			$id = 0;
+			$test_restaurant = new Restaurant($name, $location, $cuisine_id, $id);
+			$test_restaurant->save();
+
+			$name2 ='Nongs';
+			$location2 = '13 SE Ankeney St.';
+			$cuisine_id2 = 2;
+			$id2 = 1;
+			$test_restaurant2 = new Restaurant($name2, $location2, $cuisine_id2, $id2);
+			$test_restaurant2->save();
+
+			// Act
+			$test_restaurant->deleteRestaurant();
+
+			// Assert
+			$result = Restaurant::getAll();
+			$this->assertEquals([$test_restaurant2], $result);
+		}
+
 	}
 
 ?>
