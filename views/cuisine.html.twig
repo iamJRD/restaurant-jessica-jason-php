@@ -23,9 +23,7 @@
                 <input type="text" name="location" value="" required>
                 <button type="submit" class="btn btn-default" name="button">Submit</button>
             </form>
-            <form action="/delete_restaurants" method="post">
-                <button type="submit" class="btn btn-danger" name="button">Clear Restaurants</button>
-            </form>
+
             <h5>Edit Cuisine Name</h5>
             <form action="/cuisine/{{ cuisine.getId }}/edit" method="post">
                 <input type="hidden" id="cuisine_id" name="cuisine_id" value="{{ cuisine.getId }}">
@@ -36,6 +34,9 @@
             </form>
 
             <a href="/"><button type="button" class="btn btn-info" name="button">Home</button></a>
+            <form action="/delete_restaurants" method="post">
+                <button type="submit" class="btn btn-danger" name="button">Clear Restaurants</button>
+            </form>
         </div>
 
 
