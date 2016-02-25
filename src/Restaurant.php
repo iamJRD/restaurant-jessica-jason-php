@@ -84,9 +84,26 @@
 		   return $found_restaurant;
 		}
 
+		function getReviews()
+		{
+			$returned_reviews = $GLOBALS['DB']->query("SELECT * FROM reviews WHERE restaurant_id = {$this->getId()}");
+            $reviews = array();
+            foreach($returned_reviews as $review) {
+                $user_name = $review['user_name'];
+                $user_rating = $review['user_rating'];
+                $user_review = $review['user_review'];
+                $id = $review['id'];
+                $restaurant_id = $review['restaurant_id'];
+                $new_review = new Review($user_name, $user_rating, $user_review, $id, $restaurant_id);
+                array_push($reviews, $new_review);
+            }
+            return $reviews;
+		}
+
 		function deleteRestaurant()
 		{
 			$GLOBALS['DB']->exec("DELETE FROM restaurants WHERE id = {$this->getId()};");
+			$GLOBALS['DB']->exec("DELETE FROM reviews WHERE restaurant_id = {$this->getId()};");
 		}
 
 		function updateRestaurant($updated_restaurant_name, $updated_restaurant_location)

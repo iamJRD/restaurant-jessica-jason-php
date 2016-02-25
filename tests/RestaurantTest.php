@@ -213,6 +213,39 @@
 			$this->assertEquals(['Restaurant Nic', '222 S ave'], [$test_restaurant->getName(), $test_restaurant->getLocation()]);
 		}
 
+		function testGetReview ()
+		{
+			//arrange
+			$restaurant_name = 'Restaurant Jason';
+			$location = '111 N St.';
+			$cuisine_id = 1;
+			$r_id = 0;
+			$test_restaurant = new Restaurant($restaurant_name, $location, $cuisine_id, $r_id);
+			$test_restaurant->save();
+
+			$name = 'Bob';
+            $rating = 4;
+            $review = 'Yum';
+            $restaurant_id = $test_restaurant->getId();
+            $id = null;
+            $test_review = new Review($name, $rating, $review, $id, $restaurant_id);
+            $test_review->save();
+
+            $name2 = 'Ann';
+            $rating2 = 4;
+            $review2 = 'Okay';
+            $restaurant_id = null;
+            $id2 = null;
+            $test_review2 = new Review($name2, $rating2, $review2, $id2, $restaurant_id);
+            $test_review2->save();
+
+			//act
+			$result = $test_restaurant->getReviews();
+
+			//assert
+			$this->assertEquals([$test_review], $result);
+
+		}
 	}
 
 ?>
