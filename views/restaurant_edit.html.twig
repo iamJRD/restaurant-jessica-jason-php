@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <meta charset="utf-8">
+        <title>{{ restaurant.getName }}</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <h2>{{ restaurant.getName }}</h2>
+            <h3>{{ restaurant.getLocation }}</h3>
+
+
+
+            <h5>Edit Restaurant</h5>
+            <form action="/restaurant/{{ restaurant.getId }}/verify" method="get">
+                <div class="form-group">
+                    <label for="restaurant_name">Rename your Restaurant</label>
+                    <input type="text" name="restaurant_name" value="{{ restaurant.getName }}">
+                </div>
+                <div class="form-group">
+                    <label for="restaurant_location">Update your Restaurant Location</label>
+                    <input type="text" name="restaurant_location" value="{{ restaurant.getLocation }}">
+                </div>
+                <button type="submit" class="btn btn-warning" name="button">Submit</button>
+            </form>
+
+            <form action="/delete_restaurant" method="post">
+                <button type="submit" class="btn btn-danger" name="button">Delete This Restaurant</button>
+            </form>
+            
+            <a href="/"><button type="button" class="btn btn-info" name="button">Home</button></a>
+            <a href="/cuisine/{{ cuisine.getId }}"><button type="button" class="btn btn-info" name="button">Back to {{ cuisine.getName }}</button></a>
+        </div>
+    </body>
+</html>

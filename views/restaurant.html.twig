@@ -11,22 +11,31 @@
             <h3>{{ restaurant.getLocation }}</h3>
 
 
+            <form action="/restaurant/{{restaurant.getId}}/review" method="post">
+                <input type="hidden" name="restaurant_id" value={{restaurant.getId}}>
+                <label for="user_name">Your Name:</label>
+                <input type="text" name="user_name" value="" required>
+                <label for="user_rating">Your Rating (1-5):</label>
+                <input type="number" name="user_rating" min=1 max=5 value="" required>
 
-            <form action="/delete_restaurant" method="post">
-                <button type="submit" class="btn btn-danger" name="button">Delete This Restaurant</button>
+                <textarea type="test" name="user_review" value="" required>Write a review</textarea>
+
+                <button type="submit" name="button">Add your Review</button>
             </form>
 
-            <h5>Edit Restaurant Name</h5>
-            <form action="/restaurant/{{ restaurant.getId }}/verify" method="get">
-                <div class="form-group">
-                    <label for="restaurant_name">Rename your Restaurant</label>
-                    <input type="text" name="restaurant_name" value="{{ restaurant.getName }}">
-                </div>
-                <div class="form-group">
-                    <label for="restaurant_location">Update your Restaurant Location</label>
-                    <input type="text" name="restaurant_location" value="{{ restaurant.getLocation }}">
-                </div>
-                <button type="submit" class="btn btn-warning" name="button">Submit</button>
+            <ul>
+                {% for review in reviews %}
+                <li>{{ review.getUserName }} rates {{ restaurant.getName}} a {{ review.getUserRating}} out of 5.</li>
+                    <ul>
+                        <li>{{ review.getUserReview }}</li>
+                    </ul>
+                {% endfor %}
+            </ul>
+
+
+            <form action="/delete_restaurant/{{restaurant.getId}}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn btn-danger" name="button">Delete This Restaurant</button>
             </form>
 
             <a href="/"><button type="button" class="btn btn-info" name="button">Home</button></a>
