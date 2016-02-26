@@ -18,8 +18,8 @@
             <form action="/restaurant/{{ restaurant.getId }}/edit" method="post">
                 <input type="hidden" id="restaurant_id" name="restaurant_id" value="{{ restaurant.getId }}">
                 <input type="hidden" name="_method" value="patch">
-                    <input type="hidden" name="restaurant_name" value="{{ new_restaurant_name }}">
-                    <input type="hidden" name="restaurant_location" value="{{ new_restaurant_location }}">
+                <input type="hidden" name="restaurant_name" value="{{ new_restaurant_name }}">
+                <input type="hidden" name="restaurant_location" value="{{ new_restaurant_location }}">
                 <button type="submit" class="btn btn-warning" name="button">Confirm Changes</button>
             </form>
 

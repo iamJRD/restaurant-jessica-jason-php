@@ -15,11 +15,11 @@
             <h5>Edit Restaurant</h5>
             <form action="/restaurant/{{ restaurant.getId }}/verify" method="get">
                 <div class="form-group">
-                    <label for="restaurant_name">Rename your Restaurant</label>
+                    <label for="restaurant_name">Rename your Restaurant:</label>
                     <input type="text" name="restaurant_name" value="{{ restaurant.getName }}">
                 </div>
                 <div class="form-group">
-                    <label for="restaurant_location">Update your Restaurant Location</label>
+                    <label for="restaurant_location">Update your Restaurant Location:</label>
                     <input type="text" name="restaurant_location" value="{{ restaurant.getLocation }}">
                 </div>
                 <button type="submit" class="btn btn-warning" name="button">Submit</button>
@@ -28,7 +28,7 @@
             <form action="/delete_restaurant" method="post">
                 <button type="submit" class="btn btn-danger" name="button">Delete This Restaurant</button>
             </form>
-            
+
             <a href="/"><button type="button" class="btn btn-info" name="button">Home</button></a>
             <a href="/cuisine/{{ cuisine.getId }}"><button type="button" class="btn btn-info" name="button">Back to {{ cuisine.getName }}</button></a>
         </div>
