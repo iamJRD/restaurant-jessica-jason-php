@@ -60,11 +60,11 @@
 
 	$app->delete('/delete_restaurant/{id}', function($id) use ($app) {
 		$deleted_restaurant = Restaurant::find($id);
-		var_dump($deleted_restaurant);
+		$cuisines = Cuisine::find($deleted_restaurant->getCuisineId());
 		$deleted_restaurant->deleteRestaurant();
-		$restaurants = Restaurant::getAll();
-		$cuisines = Cuisine::getAll();
-		return $app['twig']->render('cuisine.html.twig', array('cuisines' => $cuisines, 'restaurants' => $restaurants));
+		$restaurants = $cuisines->getRestaurants();
+
+		return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisines, 'restaurants' => $restaurants));
 	});
 
 	$app->post('/delete_restaurants', function() use ($app) {
